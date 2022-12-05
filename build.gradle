@@ -14,6 +14,14 @@ dependencies {
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.2'
     // https://mvnrepository.com/artifact/org.quartz-scheduler/quartz
     implementation group: 'org.quartz-scheduler', name: 'quartz', version: '2.3.0'
+    //log4j impl
+    implementation group: 'org.slf4j', name: 'slf4j-log4j12', version: '1.7.30'
+    //log4j
+    implementation group: 'log4j', name: 'log4j', version: '1.2.17'
+
+    implementation 'org.apache.logging.log4j:log4j-api:2.19.0'
+    implementation 'org.apache.logging.log4j:log4j-core:2.19.0'
+
 
 }
 
