@@ -9,8 +9,8 @@ public class TriggerMaker {
             .withIdentity("HelloTrigger", "HelloGroup")
             .startNow()
             .withSchedule(simpleSchedule()
-                    .withIntervalInSeconds(5)
-                    .repeatForever())
+                    .withIntervalInMinutes(1)
+                    .withRepeatCount(3))
             .build();
 
     public Trigger getTrigger() {
