@@ -1,3 +1,4 @@
+import SFTP.SFTPConfig;
 import SFTP.SFTPControl;
 import com.jcraft.jsch.SftpException;
 import org.junit.jupiter.api.Test;
@@ -10,24 +11,27 @@ import java.util.Date;
 public class SFTPTest {
     final SFTPControl sftpUtil = new SFTPControl();
 
-    final String host = "13.124.251.220";
-    final String userName = "ec2-user";
-    final int port = 22;
-    final String uploadPath = "/home/ec2-user/scheduler";
-    final String privateKey = "/Users/leeseokwoon/Documents/lee.pem";
+    private String host ;
+    private String userName;
+    private Integer port ;
+    private String uploadPath = "/home/ec2-user/scheduler";
+    private String privateKey;
+    public void init(){
+        SFTPConfig config = new SFTPConfig();
 
+    }
 
     @Test
     public void 폴더_업로드테스트() throws SftpException, FileNotFoundException {
-        sftpUtil.init(host, userName, null, port, privateKey);
         String rootPath = System.getProperty("user.dir");;
         //LocalDir
         String sourceDir = rootPath+"/dir";
         //RemoteDir
         String targetDir = uploadPath;
-        sftpUtil.recursiveFolderUpload(sourceDir, targetDir);
+        sftpUtil.run(sourceDir, targetDir);
 
     }
+
     @Test
     public void 파일_업로드테스트(){
         // 접속

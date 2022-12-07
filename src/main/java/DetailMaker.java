@@ -2,6 +2,7 @@ import SFTP.SFTPConfig;
 import org.quartz.JobDataMap;
 import org.quartz.JobDetail;
 
+
 import static SFTP.SFTPConfig.*;
 import static org.quartz.JobBuilder.newJob;
 
@@ -12,17 +13,15 @@ public class DetailMaker {
         String rootPath = System.getProperty("user.dir");;
         //LocalDir
         String sourceDir = rootPath+"/dir";
-
+        SFTPConfig config = new SFTPConfig();
         JobDataMap SFTP_data = new JobDataMap();
-        SFTP_data.put("host", host);
-        SFTP_data.put("username", userName);
-        SFTP_data.put("port", port);
-        SFTP_data.put("privateKey", privateKey);
+
+        SFTP_data.put("host", config.host);
+        SFTP_data.put("username", config.userName);
+        SFTP_data.put("port", config.port);
+        SFTP_data.put("privateKey", config.privateKey);
         SFTP_data.put("uploadpath", uploadPath);
         SFTP_data.put("sourcepath", sourceDir);
-
-
-
 
         JobDetail job = newJob(JobScheduler.class)
                 .withIdentity("HelloJob", "HelloGroup")

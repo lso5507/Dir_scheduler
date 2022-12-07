@@ -51,6 +51,27 @@ public class SFTPControl {
 
         channelSftp = (ChannelSftp) channel;
     }
+   public void rmdir(String dir, String dirName) throws SftpException {
+        //삭제할 폴더 경로
+        //삭제할 폴더명
+        channelSftp.rmdir("/home/ec2-user/scheduler/dir");
+    }
+
+
+
+    public void run(String sourcePath, String destinationPath) throws SftpException, FileNotFoundException {
+        //업로드 전 이전 폴더 삭제후 재생성
+        //destinationPath 이전 디렉터리
+        //생성할 디렉터리
+        String dirName = sourcePath.substring(sourcePath.lastIndexOf("/")+1);
+        if(exists(destinationPath)){
+            rmdir(destinationPath,dirName);
+            mkdir(destinationPath,dirName);
+        }else{
+            mkdir(destinationPath,dirName);
+        }
+        recursiveFolderUpload(sourcePath,destinationPath);
+    }
 
     /**
      * 디렉토리 생성
@@ -201,7 +222,7 @@ public class SFTPControl {
      * @throws SftpException
      * @throws FileNotFoundException
      */
-    public  void recursiveFolderUpload(String sourcePath, String destinationPath)
+    private   void recursiveFolderUpload(String sourcePath, String destinationPath)
             throws SftpException, FileNotFoundException {
         File sourceFile = new File(sourcePath);
         if (sourceFile.isFile()) {

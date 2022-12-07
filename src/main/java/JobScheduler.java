@@ -39,7 +39,7 @@ public class JobScheduler implements Job {
         control.init(host, username,"",port,priKey);
 
         try {
-            control.recursiveFolderUpload(sourcePath,uploadPath);
+            control.run(sourcePath,uploadPath);
         } catch (SftpException e) {
             log.error("SftpException : {}",e.getMessage());
             throw new RuntimeException(e);
