@@ -72,6 +72,8 @@ public class SFTPControl {
             //검색된게 폴더일경우 재귀함수로 들어가서 파일들을 삭제
             if (entry.getAttrs().isDir()) {
                 rmdir(dir + "/" + entry.getFilename());
+                //폴더 내 파일들을 삭제 완료했을경우
+                channelSftp.rmdir(dir + "/" + entry.getFilename());
             }
             //검색된게 파일일경우 파일 삭제
             else {
@@ -90,7 +92,9 @@ public class SFTPControl {
         if(exists(dirName)){
             //sourcePath 마지막 경로 뺴오기
             rmdir(dirName);
-            mkdir(dirName);
+            //업로드 대상경로도 삭제
+            channelSftp.rmdir(dirName);
+//            mkdir(dirName);
         }else{
             mkdir(dirName);
         }
@@ -259,30 +263,43 @@ public class SFTPControl {
     private   void recursiveFolderUpload(String sourcePath, String destinationPath)
             throws SftpException, FileNotFoundException {
         File sourceFile = new File(sourcePath);
+        //sourceFile이(백업대상) 파일인경우
         if (sourceFile.isFile()) {
-            // copy if it is a file
+            //업로드 대상경로로 이동
             channelSftp.cd(destinationPath);
+            // "."일경우 (숨김폴더) 업로드하지않음
             if (!sourceFile.getName().startsWith("."))
                 channelSftp.put(new FileInputStream(sourceFile), sourceFile.getName(), ChannelSftp.OVERWRITE);
-        } else {
+        }
+        //sourceFile이(백업대상) 폴더인경우
+        else {
+            // sourceFile.isFile() == false 일경우 디렉토리
             System.out.println("inside else " + sourceFile.getName());
+            //해당 sourceFile에 대한 파일 또는 폴더목록 배열화
             File[] files = sourceFile.listFiles();
             if (files != null && !sourceFile.getName().startsWith(".")) {
+                //업로드 대상경로로 이동
                 channelSftp.cd(destinationPath);
                 SftpATTRS attrs = null;
                 // check if the directory is already existing
                 try {
+                    //해당 디렉토리가 존재하는지 확인
                     attrs = channelSftp.stat(destinationPath + "/" + sourceFile.getName());
-                } catch (Exception e) {
+                }
+                // 해당 디렉토리가 존재하지 않는다면 attrs = null
+                catch (Exception e) {
                     System.out.println(destinationPath + "/" + sourceFile.getName() + " not found");
                 }
-                // else create a directory
+                // attrs가 null이 아닐경우 (디렉토리가 존재할경우)
                 if (attrs != null) {
                     System.out.println("Directory exists IsDir=" + attrs.isDir());
-                } else {
+                }
+                // attrs가 null일경우 (디렉토리가 존재하지않을경우)
+                else {
                     System.out.println("Creating dir " + sourceFile.getName());
                     channelSftp.mkdir(sourceFile.getName());
                 }
+                // 업로드 대상 파일 배열화 후 재귀함수 이용해 업로드 진행
                 for (File f : files) {
                     recursiveFolderUpload(f.getAbsolutePath(), destinationPath + "/" + sourceFile.getName());
                 }

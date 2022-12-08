@@ -50,7 +50,7 @@ public class SFTPTest {
 
         //RemoteDir
         sftpUtil.rmdir(uploadPath);
-    }
+   }
     @Test
     public void 폴더_업로드테스트() throws SftpException, FileNotFoundException {
         sftpUtil.run(sourceDir, uploadPath);
