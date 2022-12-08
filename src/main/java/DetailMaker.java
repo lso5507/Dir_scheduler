@@ -3,7 +3,6 @@ import org.quartz.JobDataMap;
 import org.quartz.JobDetail;
 
 
-import static SFTP.SFTPConfig.*;
 import static org.quartz.JobBuilder.newJob;
 
 public class DetailMaker {

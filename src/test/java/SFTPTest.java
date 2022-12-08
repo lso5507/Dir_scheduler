@@ -1,6 +1,9 @@
 import SFTP.SFTPConfig;
 import SFTP.SFTPControl;
+import Utils.MyLogger;
 import com.jcraft.jsch.SftpException;
+import org.apache.logging.log4j.core.Logger;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
@@ -10,32 +13,54 @@ import java.util.Date;
 
 public class SFTPTest {
     final SFTPControl sftpUtil = new SFTPControl();
-
+    Logger log = MyLogger.getLogger();
     private String host ;
-    private String userName;
+    private String username;
     private Integer port ;
-    private String uploadPath = "/home/ec2-user/scheduler";
     private String privateKey;
-    public void init(){
-        SFTPConfig config = new SFTPConfig();
-
+    private String password;
+    private String sourceDir;
+    private String uploadPath;
+    SFTPConfig config;
+    @BeforeEach
+    public void before() {
+        config = new SFTPConfig();
+        host = config.host;
+        username = config.userName;
+        port = config.port;
+        privateKey = config.privateKey;
+        String rootPath = System.getProperty("user.dir");;
+        //LocalDir
+        sourceDir = rootPath+"/dir";
+        uploadPath="/home/ec2-user/scheduler/";
+        if(sftpUtil.getChannelSftp()== null) {
+            sftpUtil.init(host, username, password, port, privateKey);
+        }
+        sftpUtil.init(host, username, password, port, privateKey);
+        log.info("## SFTP Job Call!! host : {}, port : {}, username : {}, priKey : {} sourcePath : {} uploadPath :{}"
+                , host, port, username, privateKey,sourceDir,uploadPath);
     }
 
     @Test
-    public void 폴더_업로드테스트() throws SftpException, FileNotFoundException {
-        String rootPath = System.getProperty("user.dir");;
-        //LocalDir
-        String sourceDir = rootPath+"/dir";
+    public void 폴더_생성테스트(){
+        sftpUtil.mkdir(uploadPath+"/test");
+    }
+    @Test
+    public void 폴더_삭제테스트() throws SftpException, FileNotFoundException {
+
         //RemoteDir
-        String targetDir = uploadPath;
-        sftpUtil.run(sourceDir, targetDir);
+        sftpUtil.rmdir(uploadPath);
+    }
+    @Test
+    public void 폴더_업로드테스트() throws SftpException, FileNotFoundException {
+        sftpUtil.run(sourceDir, uploadPath);
 
     }
 
     @Test
     public void 파일_업로드테스트(){
         // 접속
-        sftpUtil.init(host, userName, null, port, privateKey);
+        sftpUtil.init(host, username, null, port, privateKey);
 
         // 업로드 테스트
         String rootPath = System.getProperty("user.dir");;

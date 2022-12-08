@@ -13,7 +13,9 @@ public class SFTPControl {
     private Session session = null;
     private Channel channel = null;
     private ChannelSftp channelSftp = null;
-
+    public ChannelSftp getChannelSftp(){
+        return channelSftp;
+    }
     /**
      * 서버와 연결에 필요한 값들을 가져와 초기화 시킴
      *
@@ -23,6 +25,7 @@ public class SFTPControl {
      * @param port 포트번호
      * @param privateKey 개인키
      */
+
     public void init(String host, String userName, String password, Integer port, String privateKey) {
 
         JSch jSch = new JSch();
@@ -51,10 +54,30 @@ public class SFTPControl {
 
         channelSftp = (ChannelSftp) channel;
     }
-   public void rmdir(String dir, String dirName) throws SftpException {
-        //삭제할 폴더 경로
-        //삭제할 폴더명
-        channelSftp.rmdir("/home/ec2-user/scheduler/dir");
+
+    /**
+     *
+     * @param dir 대상경로
+     * @throws SftpException
+     */
+   public void rmdir(String dir) throws SftpException {
+        // 폴더안에 파일이 있을경우 파일들을 삭제
+        Vector fileList = channelSftp.ls(dir);
+        for (int i = 0; i < fileList.size(); i++) {
+            ChannelSftp.LsEntry entry = (ChannelSftp.LsEntry) fileList.get(i);
+            //검색된 .(현재경로)..(이전경로)는 continue
+            if (entry.getFilename().equals(".") || entry.getFilename().equals("..")) {
+                continue;
+            }
+            //검색된게 폴더일경우 재귀함수로 들어가서 파일들을 삭제
+            if (entry.getAttrs().isDir()) {
+                rmdir(dir + "/" + entry.getFilename());
+            }
+            //검색된게 파일일경우 파일 삭제
+            else {
+                channelSftp.rm(dir + "/" + entry.getFilename());
+            }
+        }
     }
 
 
@@ -63,12 +86,13 @@ public class SFTPControl {
         //업로드 전 이전 폴더 삭제후 재생성
         //destinationPath 이전 디렉터리
         //생성할 디렉터리
-        String dirName = sourcePath.substring(sourcePath.lastIndexOf("/")+1);
-        if(exists(destinationPath)){
-            rmdir(destinationPath,dirName);
-            mkdir(destinationPath,dirName);
+        String dirName = destinationPath+sourcePath.substring(sourcePath.lastIndexOf("/")+1);
+        if(exists(dirName)){
+            //sourcePath 마지막 경로 뺴오기
+            rmdir(dirName);
+            mkdir(dirName);
         }else{
-            mkdir(destinationPath,dirName);
+            mkdir(dirName);
         }
         recursiveFolderUpload(sourcePath,destinationPath);
     }
@@ -79,11 +103,22 @@ public class SFTPControl {
      * @param dir 이동할 주소
      * @param mkdirName 생성할 디렉토리명
      */
-    public void mkdir(String dir, String mkdirName) {
-        if (!this.exists(dir + "/" + mkdirName)) {
+//    public void mkdir(String dir, String mkdirName) {
+//        if (!this.exists(dir + "/" + mkdirName)) {
+//            try {
+//                channelSftp.cd(dir);
+//                channelSftp.mkdir(mkdirName);
+//            } catch (SftpException e) {
+//                e.printStackTrace();
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
+//        }
+//    }
+    public void mkdir(String dir) {
+        if (!this.exists(dir)) {
             try {
-                channelSftp.cd(dir);
-                channelSftp.mkdir(mkdirName);
+                channelSftp.mkdir(dir);
             } catch (SftpException e) {
                 e.printStackTrace();
             } catch (Exception e) {
@@ -91,7 +126,6 @@ public class SFTPControl {
             }
         }
     }
-
     /**
      * 디렉토리( or 파일) 존재 여부
      * @param path 디렉토리 (or 파일)

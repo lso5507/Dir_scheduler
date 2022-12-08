@@ -5,20 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fe9b4e64-336b-4f6c-a4b9-7c0304929251" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.gradle/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/checksums/checksums.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/checksums/md5-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/checksums/md5-checksums.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/checksums/sha1-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/checksums/sha1-checksums.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dir/SGA_2022-09-23 (1).log" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/classes/DetailMaker.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/DetailMaker.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/JobScheduler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/JobScheduler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/SFTP/SFTPConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/SFTP/SFTPConfig.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/classes/SFTP/SFTPControl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/SFTP/SFTPControl.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/test/classes/SFTPTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/test/classes/SFTPTest.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/DetailMaker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DetailMaker.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/JobScheduler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/JobScheduler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/SFTP/SFTPConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SFTP/SFTPConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/SFTP/SFTPControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SFTP/SFTPControl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/SFTPTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/SFTPTest.java" afterDir="false" />
     </list>
@@ -75,7 +67,7 @@
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "jdk.selected.JAVA_MODULE": "corretto-17",
     "last_opened_file_path": "C:/Users/swlee/Documents/GitHub/Dir_scheduler",
-    "project.structure.last.edited": "SDKs",
+    "project.structure.last.edited": "Project",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
     "settings.editor.selected.configurable": "reference.settingsdialog.project.gradle"
@@ -89,7 +81,7 @@
       <recent name="" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Main">
+  <component name="RunManager" selected="JUnit.SFTPTest.폴더_업로드테스트">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="Dir_Scheduler.main" />
@@ -117,16 +109,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="SFTPTest.업로드테스트" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Dir_Scheduler.test" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="SFTPTest" />
-      <option name="METHOD_NAME" value="업로드테스트" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="SFTPTest.폴더_업로드테스트" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Dir_Scheduler.test" />
       <option name="PACKAGE_NAME" value="" />
@@ -137,12 +119,33 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="SFTPTest.폴더_삭제테스트" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Dir_Scheduler.test" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="SFTPTest" />
+      <option name="METHOD_NAME" value="폴더_삭제테스트" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SFTPTest.폴더_생성테스트" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Dir_Scheduler.test" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="SFTPTest" />
+      <option name="METHOD_NAME" value="폴더_생성테스트" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Main" />
         <item itemvalue="JUnit.SFTPTest.폴더_업로드테스트" />
+        <item itemvalue="JUnit.SFTPTest.폴더_삭제테스트" />
+        <item itemvalue="JUnit.SFTPTest.폴더_생성테스트" />
+        <item itemvalue="Application.Main" />
         <item itemvalue="JUnit.DirectoryCopy.폴더복사" />
-        <item itemvalue="JUnit.SFTPTest.업로드테스트" />
       </list>
     </recent_temporary>
   </component>
@@ -182,9 +185,19 @@
           <option name="timeStamp" value="4" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/DetailMaker.java</url>
+          <line>14</line>
+          <option name="timeStamp" value="33" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/test/java/SFTPTest.java</url>
+          <line>45</line>
+          <option name="timeStamp" value="38" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/SFTP/SFTPControl.java</url>
-          <line>56</line>
-          <option name="timeStamp" value="32" />
+          <line>87</line>
+          <option name="timeStamp" value="39" />
         </line-breakpoint>
         <breakpoint enabled="true" type="java-exception">
           <properties class="com.jcraft.jsch.SftpException" package="com.jcraft.jsch" />
