@@ -1,0 +1,20 @@
+[INFO], 2022-12-10 18:02:56 StdSchedulerFactory:1208 - Using default implementation for ThreadExecutor
+[INFO], 2022-12-10 18:02:56 SimpleThreadPool:268 - Job execution threads will use class loader of thread: main
+[INFO], 2022-12-10 18:02:56 SchedulerSignalerImpl:61 - Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+[INFO], 2022-12-10 18:02:56 QuartzScheduler:229 - Quartz Scheduler v.2.3.0 created.
+[INFO], 2022-12-10 18:02:56 RAMJobStore:155 - RAMJobStore initialized.
+[INFO], 2022-12-10 18:02:56 QuartzScheduler:294 - Scheduler meta-data: Quartz Scheduler (v2.3.0) 'DefaultQuartzScheduler' with instanceId 'NON_CLUSTERED'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+[INFO], 2022-12-10 18:02:56 StdSchedulerFactory:1362 - Quartz scheduler 'DefaultQuartzScheduler' initialized from default resource file in Quartz package: 'quartz.properties'
+[INFO], 2022-12-10 18:02:56 StdSchedulerFactory:1366 - Quartz scheduler version: 2.3.0
+[INFO], 2022-12-10 18:02:56 QuartzScheduler:547 - Scheduler DefaultQuartzScheduler_$_NON_CLUSTERED started.
+[INFO], 2022-12-10 18:02:56 MyLogger:21 - [jobToBeExecuted   ][HelloGroup.HelloJob] 작업시작
+[INFO], 2022-12-10 18:02:56 MyLogger:23 - ## SFTP Job Call!!
+[INFO], 2022-12-10 18:02:56 MyLogger:35 - ## SFTP Job Call!! host : 13.124.251.220, port : 22, username : ec2-user, priKey : /Users/leeseokwoon/Documents/lee.pem sourcePath : /Users/leeseokwoon/Documents/GitHub/Quartz_scheduler/dir uploadPath :/home/ec2-user/scheduler/
+[INFO], 2022-12-10 18:02:59 MyLogger:38 - [jobWasExecuted    ][HelloGroup.HelloJob] 작업완료
